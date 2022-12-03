@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
+import 'package:kembangin_mobile/pages/auth/login.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -20,6 +21,15 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Login'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
           ),
