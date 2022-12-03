@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+    print(request.loggedIn.toString() + "haa");
 
     return Scaffold(
       body: Column(

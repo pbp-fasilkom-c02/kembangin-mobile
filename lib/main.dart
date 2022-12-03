@@ -14,9 +14,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // print(request.loggedIn);
     return Provider(
         create: (_) {
           CookieRequest request = CookieRequest();
+
           return request;
         },
         child: MaterialApp(
