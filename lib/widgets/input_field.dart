@@ -32,6 +32,7 @@ class _InputFieldState extends State<InputField> {
           ]),
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+          controller: widget.controller,
           obscureText: widget.isPassword,
           decoration: InputDecoration(
               hintStyle: const TextStyle(color: Color(0xffA6B0BD)),

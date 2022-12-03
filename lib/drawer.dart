@@ -27,7 +27,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             title: const Text('Login'),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),
               );

@@ -2,6 +2,9 @@ import 'package:kembangin_mobile/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:kembangin_mobile/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,76 +13,152 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-// TODO: LOGIN UI
 class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  @override
-  void dispose() {
+  final _loginFormKey = GlobalKey<FormState>();
+  String username = "";
+  String password1 = "";
+  bool isPasswordVisible = false;
+
+  void clear() {
     // Clean up the controller when the widget is disposed.
-    usernameController.dispose();
-    super.dispose();
+    usernameController.clear();
+    passwordController.clear();
+
+    // super.dispose();
+  }
+
+  void _errorToast(BuildContext context, bool isError) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: const Text("Username atau password kamu Salah!"),
+        action: SnackBarAction(
+            label: 'Close',
+            textColor: Colors.white,
+            onPressed: () {
+              scaffold.hideCurrentSnackBar;
+            }),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Text(
-            "Kembangin",
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-          ),
-          const Text(
-            "❤️",
-            style: TextStyle(fontSize: 40),
-          ),
+      body: Column(
+        children: [
           const SizedBox(
-            height: 40,
+            height: 70,
           ),
-          InputField(
-            prefixIcon: Icon(
-              Icons.person_outline,
-              size: 30,
-              color: Colors.red.shade200,
-            ),
-            hintText: "Username",
-            controller: usernameController,
-            isPassword: false,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InputField(
-            prefixIcon: Icon(Icons.lock_outline_rounded,
-                size: 30, color: Colors.red.shade200),
-            hintText: "Password",
-            controller: passwordController,
-            isPassword: true,
-          ),
-          ButtonWidget(
-              marginHorizontal: 40,
-              marginVertical: 25,
-              width: double.infinity,
-              text: const Text(
-                "Sign In",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+          Text(usernameController.text),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 20,
               ),
-              paddingVertical: 8,
-              paddingHorizontal: 0,
-              onPressed: () => {print("hehe")}),
-          const SizedBox(
-            height: 20,
+              TextButton(
+                  onPressed: () => Navigator.pop(
+                        context,
+                      ),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.chevron_left_outlined,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        "Kembali",
+                        style: TextStyle(color: Colors.red),
+                      )
+                    ],
+                  )),
+            ],
           ),
-          Text("Tidak mempunyai akun?",
-              style: TextStyle(color: Colors.grey.shade700)),
-          TextButton(
-              onPressed: () => print("hehe"),
-              child: Text(
-                "SIGN UP",
-                style: TextStyle(color: Colors.red.shade500, fontSize: 16),
-              )),
-        ]),
+          Container(
+            margin: const EdgeInsets.only(top: 80),
+            child: Column(children: [
+              const Text(
+                "Kembangin",
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                "❤️",
+                style: TextStyle(fontSize: 40),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              InputField(
+                prefixIcon: Icon(
+                  Icons.person_outline,
+                  size: 30,
+                  color: Colors.red.shade200,
+                ),
+                hintText: "Username",
+                controller: usernameController,
+                isPassword: false,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              InputField(
+                prefixIcon: Icon(Icons.lock_outline_rounded,
+                    size: 30, color: Colors.red.shade200),
+                hintText: "Password",
+                controller: passwordController,
+                isPassword: true,
+              ),
+              ButtonWidget(
+                  marginHorizontal: 40,
+                  marginVertical: 25,
+                  width: double.infinity,
+                  text: const Text(
+                    "Sign In",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  paddingVertical: 8,
+                  paddingHorizontal: 0,
+                  onPressed: () async {
+                    username = usernameController.text;
+                    password1 = passwordController.text;
+                    final response = await request
+                        .login(
+                            "https://kembangin.up.railway.app/authentication/login",
+                            {'username': username, 'password': password1})
+                        .then((value) => {
+                              if (value['status'])
+                                {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const MyApp()),
+                                  )
+                                }
+                              else
+                                {_errorToast(context, true)}
+                            })
+                        .catchError((err) => print(err));
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              Text("Tidak mempunyai akun?",
+                  style: TextStyle(color: Colors.grey.shade700)),
+              TextButton(
+                  onPressed: () => print("hehe"),
+                  child: Text(
+                    "SIGN UP",
+                    style: TextStyle(color: Colors.red.shade500, fontSize: 16),
+                  )),
+            ]),
+          ),
+        ],
       ),
       drawer: const MyDrawer(),
     );

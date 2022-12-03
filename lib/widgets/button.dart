@@ -7,7 +7,7 @@ class ButtonWidget extends StatefulWidget {
   final double paddingHorizontal;
   final double marginVertical;
   final double marginHorizontal;
-  final Function() onPressed;
+  final VoidCallback? onPressed;
 
   const ButtonWidget(
       {super.key,
@@ -41,7 +41,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 spreadRadius: 0)
           ]),
       child: TextButton(
-          onPressed: () => widget.onPressed,
+          onPressed: widget.onPressed,
           child: Container(
               padding: EdgeInsets.symmetric(
                   vertical: widget.paddingVertical,
