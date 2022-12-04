@@ -16,7 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
-    print(request.loggedIn);
+    print(request.jsonData);
     return Drawer(
       child: Column(
         children: [
