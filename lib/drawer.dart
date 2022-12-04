@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
 import 'package:kembangin_mobile/pages/auth/login.dart';
 import 'package:kembangin_mobile/pages/auth/register.dart';
+import 'package:kembangin_mobile/pages/forum/forum_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,15 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Forum'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ForumPage()),
               );
             },
           ),
