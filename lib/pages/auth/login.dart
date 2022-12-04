@@ -117,15 +117,16 @@ class _LoginPageState extends State<LoginPage> {
                         {
                           'username': username,
                           'password': password1
-                        }).then((value) => {
-                          if (value['status'])
+                        }).then((response) => {
+                          if (response['status'])
                             {
+                              request.jsonData = response['user_data'],
                               Navigator.pop(
                                 context,
                               ),
                             }
                           else
-                            {toast(context, true, value['message'])}
+                            {toast(context, true, response['message'])}
                         });
                   }),
               const SizedBox(
