@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.read<CookieRequest>();
 
     return Scaffold(
       body: Column(
@@ -120,10 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                         }).then((value) => {
                           if (value['status'])
                             {
-                              Navigator.pushReplacement(
+                              Navigator.pop(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MyApp()),
                               ),
                             }
                           else

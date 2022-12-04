@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.read<CookieRequest>();
     print(request.loggedIn);
     return Scaffold(
       appBar: AppBar(
