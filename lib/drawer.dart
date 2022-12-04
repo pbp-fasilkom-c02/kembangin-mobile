@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
 import 'package:kembangin_mobile/pages/auth/login.dart';
-import 'package:provider/provider.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:kembangin_mobile/pages/auth/register.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -32,6 +31,15 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Register'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const RegisterPage()),
               );
             },
           ),

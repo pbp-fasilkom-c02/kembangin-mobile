@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // print(request.loggedIn);
     return Provider(
         create: (_) {
           CookieRequest request = CookieRequest();
@@ -51,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    print(request.loggedIn);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

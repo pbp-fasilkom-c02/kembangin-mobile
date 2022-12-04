@@ -4,31 +4,53 @@ import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:kembangin_mobile/main.dart';
-import 'package:kembangin_mobile/pages/auth/register.dart';
+import 'package:kembangin_mobile/pages/auth/login.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
 
   String username = "";
+  String email = "";
   String password1 = "";
+  String password2 = "";
+  String? isDoctor = "";
   bool isPasswordVisible = false;
 
   void clear() {
     // Clean up the controller when the widget is disposed.
     usernameController.clear();
     passwordController.clear();
+    emailController.clear();
+    repeatPasswordController.clear();
 
     // super.dispose();
+  }
+
+  void _errorToast(BuildContext context, bool isError) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: const Text("Username atau password kamu Salah!"),
+        action: SnackBarAction(
+            label: 'Close',
+            textColor: Colors.white,
+            onPressed: () {
+              scaffold.hideCurrentSnackBar;
+            }),
+      ),
+    );
   }
 
   @override
@@ -66,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
           Container(
-            margin: const EdgeInsets.only(top: 80),
+            margin: const EdgeInsets.only(top: 20),
             child: Column(children: [
               const Text(
                 "Kembangin",
@@ -93,18 +115,72 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               InputField(
+                prefixIcon: Icon(
+                  Icons.mail_outline,
+                  size: 30,
+                  color: Colors.red.shade200,
+                ),
+                hintText: "Email",
+                controller: emailController,
+                isPassword: false,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              InputField(
                 prefixIcon: Icon(Icons.lock_outline_rounded,
                     size: 30, color: Colors.red.shade200),
                 hintText: "Password",
                 controller: passwordController,
                 isPassword: true,
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              InputField(
+                prefixIcon: Icon(Icons.lock_outline_rounded,
+                    size: 30, color: Colors.red.shade200),
+                hintText: "Repeat Password",
+                controller: repeatPasswordController,
+                isPassword: true,
+              ),
+              const SizedBox(height: 20),
+
+              const Text("Apakah anda dokter?"),
+              // TODO: FIX THIS LATER
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                  Widget>[
+                Radio(
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.red),
+                  value: "yes",
+                  groupValue: isDoctor,
+                  onChanged: (String? value) {
+                    setState(() {
+                      isDoctor = value;
+                    });
+                  },
+                ),
+                const Text('Ya'),
+                Radio(
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.red),
+                  value: "no",
+                  groupValue: isDoctor,
+                  onChanged: (String? value) {
+                    setState(() {
+                      isDoctor = value;
+                    });
+                  },
+                ),
+                const Text('Tidak')
+              ]),
               ButtonWidget(
                   marginHorizontal: 40,
                   marginVertical: 25,
                   width: double.infinity,
                   text: const Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   paddingVertical: 8,
@@ -112,39 +188,30 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     username = usernameController.text;
                     password1 = passwordController.text;
-                    final response = await request.login(
-                        "https://kembangin.up.railway.app/authentication/login",
+                    email = emailController.text;
+                    password2 = repeatPasswordController.text;
+                    final response = await request.post(
+                        "https://kembangin.up.railway.app/authentication/register",
                         {
                           'username': username,
-                          'password': password1
+                          'email': email,
+                          'password': password1,
+                          'repeat_password': password2,
+                          'doctor_choice': isDoctor
                         }).then((value) => {
                           if (value['status'])
                             {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MyApp()),
+                                    builder: (context) => const LoginPage()),
                               ),
+                              toast(context, false, value['message'])
                             }
                           else
                             {toast(context, true, value['message'])}
                         });
                   }),
-              const SizedBox(
-                height: 20,
-              ),
-              Text("Tidak mempunyai akun?",
-                  style: TextStyle(color: Colors.grey.shade700)),
-              TextButton(
-                  onPressed: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
-                      ),
-                  child: Text(
-                    "SIGN UP",
-                    style: TextStyle(color: Colors.red.shade500, fontSize: 16),
-                  )),
             ]),
           ),
         ],
