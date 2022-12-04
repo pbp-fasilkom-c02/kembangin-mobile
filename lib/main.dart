@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kembangin_mobile/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kembangin_mobile/bottom_nav.dart';
+import 'package:kembangin_mobile/top_nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,12 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
-    print(request.loggedIn);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      drawer: const MyDrawer(),
+      appBar: const TopNavbar(),
+      bottomNavigationBar: const BottomNav(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
