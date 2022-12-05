@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kembangin_mobile/bottom_nav.dart';
-import 'package:kembangin_mobile/top_nav.dart';
+import 'package:kembangin_mobile/widgets/bottom_nav.dart';
+import 'package:kembangin_mobile/widgets/top_nav.dart';
 
 void main() {
   runApp(const MyApp());
