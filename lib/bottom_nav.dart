@@ -31,7 +31,7 @@ class _BottomNavState extends State<BottomNav> {
             gap: 8,
             onPressed: () => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyApp()))
+                  MaterialPageRoute(builder: (context) => const MyHomePage()))
             },
           ),
           GButton(
