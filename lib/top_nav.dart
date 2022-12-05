@@ -83,7 +83,7 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MyApp()),
+                                  builder: (context) => const MyHomePage()),
                             );
                           },
                           child: const Text(
@@ -94,11 +94,14 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                     PopupMenuItem(
                       child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
+                            Navigator.pop(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MyApp()),
                             );
+                            Navigator.pop(
+                              context,
+                            );
+                            request.logout(
+                                "https://kembangin.up.railway.app/authentication/logout");
                           },
                           child: const Text(
                             "Logout",

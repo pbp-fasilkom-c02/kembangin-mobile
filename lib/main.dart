@@ -36,8 +36,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.read<CookieRequest>();
-    print(request.loggedIn);
     return Scaffold(
       appBar: const TopNavbar(),
       bottomNavigationBar: const BottomNav(),
