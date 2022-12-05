@@ -1,10 +1,10 @@
-import 'package:kembangin_mobile/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:kembangin_mobile/main.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:kembangin_mobile/main.dart';
+
 import 'package:kembangin_mobile/pages/auth/register.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';
 
@@ -121,9 +121,11 @@ class _LoginPageState extends State<LoginPage> {
                           if (response['status'])
                             {
                               request.jsonData = response['user_data'],
-                              Navigator.pop(
-                                context,
-                              ),
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MyHomePage())),
                             }
                           else
                             {toast(context, true, response['message'])}
@@ -148,7 +150,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      drawer: const MyDrawer(),
     );
   }
 }

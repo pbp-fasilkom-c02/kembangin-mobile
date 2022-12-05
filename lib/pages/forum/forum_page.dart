@@ -1,4 +1,3 @@
-import 'package:kembangin_mobile/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
@@ -116,7 +115,6 @@ class _ForumPageState extends State<ForumPage> {
           ),
         ],
       ),
-      drawer: const MyDrawer(),
     );
   }
 }
