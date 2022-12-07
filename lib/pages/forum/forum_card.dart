@@ -4,6 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:kembangin_mobile/utils/delete_forum.dart';
 import 'dart:convert';
 import 'package:kembangin_mobile/widgets/toast.dart';
+import 'package:kembangin_mobile/pages/forum/forum_detail.dart';
 
 class ForumCard extends StatefulWidget {
   const ForumCard({
@@ -35,13 +36,21 @@ class ForumCardState extends State<ForumCard> {
             ));
           } else {
             return ListView.builder(
-                // scrollDirection: Axis.vertical,
                 primary: false,
                 shrinkWrap: true,
                 itemCount: snapshot.data!.length,
                 itemBuilder: (data, index) => Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 0),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForumDetail(
+                                    forumData: snapshot.data![
+                                        snapshot.data!.length - index - 1])));
+                      },
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -114,9 +123,7 @@ class ForumCardState extends State<ForumCard> {
                                     children: [
                                       const Text("Dibuat oleh "),
                                       Text(
-                                        snapshot.data![snapshot.data!.length -
-                                            index -
-                                            1]['author'],
+                                        "${snapshot.data![snapshot.data!.length - index - 1]['is_doctor'] ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1]['author']}",
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
@@ -126,18 +133,8 @@ class ForumCardState extends State<ForumCard> {
                               )),
                         ),
                       ),
-                    ));
+                    )));
           }
         }));
   }
-
-  // void rebuildAllChildren(BuildContext context) {
-  //   void rebuild(Element el) {
-  //     el.markNeedsBuild();
-  //     el.visitChildren(rebuild);
-  //     // print("haha");
-  //   }
-
-  //   (context as Element).visitChildren(rebuild);
-  // }
 }
