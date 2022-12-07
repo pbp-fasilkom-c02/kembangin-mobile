@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:kembangin_mobile/pages/forum/forum_page.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  final int index;
+  const BottomNav({super.key, required this.index});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -20,6 +22,7 @@ class _BottomNavState extends State<BottomNav> {
         backgroundColor: Colors.pink.shade50,
         tabBackgroundColor: Colors.red.shade100,
         padding: const EdgeInsets.all(16),
+        selectedIndex: widget.index,
         tabs: [
           GButton(
             icon: Icons.newspaper_sharp,
@@ -35,14 +38,17 @@ class _BottomNavState extends State<BottomNav> {
             },
           ),
           GButton(
-            icon: Icons.chat_bubble_sharp,
+            icon: Icons.question_answer_outlined,
             iconSize: 30,
             iconColor: Colors.red,
             iconActiveColor: Colors.red.shade900,
             text: 'Forum',
             textColor: Colors.red.shade900,
             gap: 8,
-            onPressed: () => {},
+            onPressed: () => {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => ForumPage()))
+            },
           ),
           GButton(
             icon: Icons.child_care_sharp,
