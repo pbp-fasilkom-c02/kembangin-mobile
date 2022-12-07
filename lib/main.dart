@@ -38,7 +38,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopNavbar(),
-      bottomNavigationBar: const BottomNav(),
+      bottomNavigationBar: const BottomNav(
+        index: 0,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
