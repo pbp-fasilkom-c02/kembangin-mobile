@@ -3,7 +3,6 @@
 //     final forum = forumFromJson(jsonString);
 
 import 'dart:convert';
-import 'package:kembangin_mobile/models/reply_model.dart';
 
 List<Forum> forumFromJson(String str) =>
     List<Forum>.from(json.decode(str).map((x) => Forum.fromJson(x)));
