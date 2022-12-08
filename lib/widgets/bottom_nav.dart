@@ -33,8 +33,12 @@ class _BottomNavState extends State<BottomNav> {
             textColor: Colors.red.shade900,
             gap: 8,
             onPressed: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()))
+              widget.index != 0
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MyHomePage()))
+                  : null
             },
           ),
           GButton(
@@ -46,8 +50,10 @@ class _BottomNavState extends State<BottomNav> {
             textColor: Colors.red.shade900,
             gap: 8,
             onPressed: () => {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => ForumPage()))
+              widget.index != 1
+                  ? Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ForumPage()))
+                  : null
             },
           ),
           GButton(

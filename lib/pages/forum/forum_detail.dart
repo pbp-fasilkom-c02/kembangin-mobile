@@ -7,10 +7,11 @@ import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';
 import 'package:kembangin_mobile/pages/forum/reply_card.dart';
+import 'package:kembangin_mobile/models/forum_model.dart';
 
 // ignore: must_be_immutable
 class ForumDetail extends StatelessWidget {
-  final dynamic forumData;
+  final Forum forumData;
   ForumDetail({super.key, required this.forumData});
 
   final komentarController = TextEditingController();
@@ -37,19 +38,40 @@ class ForumDetail extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Row(children: [
+                const SizedBox(
+                  width: 40,
+                ),
+                TextButton(
+                    onPressed: () => Navigator.pop(
+                          context,
+                        ),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.chevron_left_outlined,
+                          color: Colors.red,
+                        ),
+                        Text(
+                          "Kembali",
+                          style: TextStyle(color: Colors.red),
+                        )
+                      ],
+                    )),
+              ]),
               Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        forumData['question'],
+                        forumData.question,
                         style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                      Text(forumData['created_at'].toString().substring(0, 10)),
+                      Text(forumData.createdAt.toString().substring(0, 10)),
                       Text(
-                        forumData['description'],
+                        forumData.description,
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -80,7 +102,7 @@ class ForumDetail extends StatelessWidget {
                             komentar = komentarController.text;
                             // print(komentar);
                             if (request.jsonData['username'] != null) {
-                              int forum_id = forumData['pk'];
+                              int forum_id = forumData.pk;
                               String user = request.jsonData['username'];
                               // print(user);
                               final response = await request.post(
@@ -101,7 +123,7 @@ class ForumDetail extends StatelessWidget {
                                   "Kamu harus login terlebih dahulu!");
                             }
                           }),
-                      ReplyCard(forumPk: forumData['pk']),
+                      ReplyCard(forumPk: forumData.pk),
                     ]),
               ),
             ],
