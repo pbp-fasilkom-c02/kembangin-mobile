@@ -5,6 +5,7 @@ import 'package:kembangin_mobile/utils/delete_forum.dart';
 import 'dart:convert';
 import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/pages/forum/forum_detail.dart';
+import 'package:kembangin_mobile/utils/forum_fetch.dart';
 
 class ForumCard extends StatefulWidget {
   const ForumCard({
@@ -24,7 +25,7 @@ class ForumCardState extends State<ForumCard> {
   Widget build(BuildContext context) {
     Map res;
     final request = context.read<CookieRequest>();
-    Future fut = request.get("https://kembangin.up.railway.app/forum/json");
+    Future fut = fetchForum();
 
     return (FutureBuilder(
         future: fut,
@@ -44,7 +45,7 @@ class ForumCardState extends State<ForumCard> {
                         const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ForumDetail(
@@ -66,9 +67,11 @@ class ForumCardState extends State<ForumCard> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          snapshot.data![snapshot.data!.length -
-                                              index -
-                                              1]['question'],
+                                          snapshot
+                                              .data![snapshot.data!.length -
+                                                  index -
+                                                  1]
+                                              .question,
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20),
@@ -77,10 +80,13 @@ class ForumCardState extends State<ForumCard> {
                                             onPressed: () async {
                                               try {
                                                 await deleteForum(
-                                                        snapshot.data![snapshot
-                                                                .data!.length -
-                                                            index -
-                                                            1]['pk'],
+                                                        snapshot
+                                                            .data![snapshot
+                                                                    .data!
+                                                                    .length -
+                                                                index -
+                                                                1]
+                                                            .pk,
                                                         request.jsonData[
                                                             'username'])
                                                     .then((response) => {
@@ -113,9 +119,10 @@ class ForumCardState extends State<ForumCard> {
                                       ]),
                                   Row(
                                     children: [
-                                      Text(snapshot.data![
+                                      Text(snapshot
+                                          .data![
                                               snapshot.data!.length - index - 1]
-                                          ['description']),
+                                          .description),
                                     ],
                                   ),
                                   const Spacer(),
@@ -123,7 +130,7 @@ class ForumCardState extends State<ForumCard> {
                                     children: [
                                       const Text("Dibuat oleh "),
                                       Text(
-                                        "${snapshot.data![snapshot.data!.length - index - 1]['is_doctor'] ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1]['author']}",
+                                        "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
