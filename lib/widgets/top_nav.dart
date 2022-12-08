@@ -33,7 +33,7 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
               iconSize: 35,
               color: Colors.red,
               icon: const Icon(
-                Icons.person_2,
+                Icons.person,
               ),
               onPressed: () {
                 // nanti update ya kade
