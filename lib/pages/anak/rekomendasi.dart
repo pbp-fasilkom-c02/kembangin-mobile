@@ -7,9 +7,9 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:kembangin_mobile/pages/auth/login.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';
 
-import '../../bottom_nav.dart';
+import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import '../../models/rekomendasi_model.dart';
-import '../../top_nav.dart';
+import 'package:kembangin_mobile/widgets/top_nav.dart';
 import '../../utils/rekomendasi_fetch.dart';
 
 // Detail Page untuk menampilkan detail data MyWatchList
@@ -40,14 +40,14 @@ class DetailPage extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Text(gambar,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            Image.network(gambar, width: 300, height: 300),
             Row(
               children: [
                 SizedBox(width: 15, height: 25),
-                Text(namaBarang,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Flexible(
+                    child: Text(namaBarang,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold))),
               ],
             ),
             Row(
@@ -56,13 +56,15 @@ class DetailPage extends StatelessWidget {
                 Text(hargaBarang, style: TextStyle(fontSize: 20)),
               ],
             ),
+            Row(children: [
+              SizedBox(width: 15, height: 25),
+              Text('Deskripsi: ',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ]),
             Row(
               children: [
                 SizedBox(width: 15, height: 25),
-                Text('Deskripsi: ',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text(deskripsi, style: TextStyle(fontSize: 20)),
+                Flexible(child: Text(deskripsi, style: TextStyle(fontSize: 20)))
               ],
             ),
             ElevatedButton(
@@ -117,7 +119,9 @@ class _MyRekomendasiPageState extends State<MyRekomendasiPage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: const TopNavbar(),
-      bottomNavigationBar: const BottomNav(),
+      bottomNavigationBar: const BottomNav(
+        index: 2,
+      ),
       body: FutureBuilder(
           future: _getRekomendasiAsync,
           builder: (context, AsyncSnapshot snapshot) {
@@ -174,13 +178,9 @@ class _MyRekomendasiPageState extends State<MyRekomendasiPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "${snapshot.data![index].fields.gambar}",
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              Image.network(
+                                  "${snapshot.data![index].fields.gambar}"),
+                              const SizedBox(height: 10),
                               Text(
                                 "${snapshot.data![index].fields.namaBarang}",
                                 style: const TextStyle(

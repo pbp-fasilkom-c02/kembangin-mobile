@@ -16,7 +16,10 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
       leading: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()));
+            },
             color: Colors.red,
             icon: const Icon(Icons.home),
             iconSize: 35,
@@ -80,7 +83,7 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MyApp()),
+                                  builder: (context) => const MyHomePage()),
                             );
                           },
                           child: const Text(
@@ -90,12 +93,13 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     PopupMenuItem(
                       child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MyApp()),
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyApp()));
+                            final response = await request.logout(
+                                "https://kembangin.up.railway.app/authentication/logout");
                           },
                           child: const Text(
                             "Logout",

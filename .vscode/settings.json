@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/kembangin-mobile/windows/runner"
+    "cmake.sourceDirectory": "${workspaceFolder}/kembangin-mobile/windows/runner",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
