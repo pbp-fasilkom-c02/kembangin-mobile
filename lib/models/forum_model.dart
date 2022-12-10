@@ -18,6 +18,7 @@ class Forum {
     required this.createdAt,
     required this.isDoctor,
     required this.pk,
+    required this.replies,
     required this.upvote,
     required this.downvote,
     required this.authorPk,
@@ -30,6 +31,7 @@ class Forum {
   bool isDoctor;
   int pk;
   int upvote;
+  List<dynamic> replies;
   int downvote;
   int authorPk;
 
@@ -39,6 +41,7 @@ class Forum {
         description: json["description"],
         createdAt: json["created_at"],
         isDoctor: json["is_doctor"],
+        replies: json["replies"],
         pk: json["pk"],
         upvote: json["upvote"],
         downvote: json["downvote"],
