@@ -8,7 +8,10 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:kembangin_mobile/pages/auth/login.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';
 
+import '../../bottom_nav.dart';
+import '../../main.dart';
 import '../../models/rekomendasi_model.dart';
+import '../../top_nav.dart';
 import '../../utils/rekomendasi_fetch.dart';
 
 class MyAnakPage extends StatefulWidget {
@@ -42,33 +45,32 @@ class _MyAnakPageState extends State<MyAnakPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: const Text('Anak'),
+      appBar: const TopNavbar(),
+      bottomNavigationBar: const BottomNav(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ListTile(
+              title: const Text('Perkembangan Anak'),
+              onTap: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const MyApp()))
+              },
+            ),
+            ListTile(
+              title: const Text('Rekomendasi Anak'),
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyRekomendasiPage()),
+                )
+              },
+            ),
+          ],
         ),
-        body: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Card(
-                  child: ListTile(
-                    title: Text("Kebutuhan Anak"),
-                    onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyRekomendasiPage()));
-                    },
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text("Perkembangan Anak"),
-                  ),
-                ),
-              ],
-            )));
+      ),
+    );
   }
 }

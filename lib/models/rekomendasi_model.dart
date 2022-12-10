@@ -15,18 +15,18 @@ class Rekomendasi {
         required this.fields,
     });
 
-    String model;
+    Model? model;
     int pk;
     Fields fields;
 
     factory Rekomendasi.fromJson(Map<String, dynamic> json) => Rekomendasi(
-        model: json["model"],
+        model: modelValues.map[json["model"]],
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "model": model,
+        "model": modelValues.reverse![model],
         "pk": pk,
         "fields": fields.toJson(),
     };
@@ -66,4 +66,23 @@ class Fields {
         "deskripsi": deskripsi,
         "url": url,
     };
+}
+
+enum Model { REKOMENDASI_REKOMENDASI }
+
+final modelValues =
+    EnumValues({"rekomendasi.rekomendasi": Model.REKOMENDASI_REKOMENDASI});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String>? reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String>? get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }

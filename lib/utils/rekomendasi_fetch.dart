@@ -5,9 +5,15 @@ import 'dart:convert';
 Future<List<Rekomendasi>> fetchRekomendasi() async {
   var url = Uri.parse('https://kembangin.up.railway.app/rekomendasi/json/');
   var response = await http.get(url, headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
   });
+
+  // var response = await http.get(url, headers: {
+  //   'Content-Type': 'application/json',
+  //   'Accept': 'application/json',
+  // });
+
 
   // melakukan decode response menjadi bentuk json
   var data = jsonDecode(utf8.decode(response.bodyBytes));

@@ -7,10 +7,7 @@ import 'package:kembangin_mobile/pages/anak/anak.dart';
 import 'models/rekomendasi_model.dart';
 
 class BottomNav extends StatefulWidget {
-  final List<Rekomendasi> lst;
-  final Function(Rekomendasi) addData;
-
-  const BottomNav({super.key, required this.lst, required this.addData});
+  const BottomNav({super.key});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -62,8 +59,7 @@ class _BottomNavState extends State<BottomNav> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MyAnakPage(
-                    ),
+                    builder: (context) => const MyAnakPage(),
                   ))
             },
           ),
