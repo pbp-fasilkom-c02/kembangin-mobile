@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/pages/anak/rekomendasi.dart';
-import 'package:kembangin_mobile/widgets/input_field.dart';
-import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:kembangin_mobile/pages/auth/login.dart';
-import 'package:kembangin_mobile/widgets/toast.dart';
-
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import '../../main.dart';
-import '../../models/rekomendasi_model.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';
-import '../../utils/rekomendasi_fetch.dart';
 
 class MyAnakPage extends StatefulWidget {
   const MyAnakPage({super.key});
@@ -46,7 +38,9 @@ class _MyAnakPageState extends State<MyAnakPage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: const TopNavbar(),
-      bottomNavigationBar: const BottomNav(index: 2,),
+      bottomNavigationBar: const BottomNav(
+        index: 2,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +49,7 @@ class _MyAnakPageState extends State<MyAnakPage> {
               title: const Text('Perkembangan Anak'),
               onTap: () => {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MyApp()))
+                    MaterialPageRoute(builder: (context) => const MyHomePage()))
               },
             ),
             ListTile(
