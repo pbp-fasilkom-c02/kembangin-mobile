@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
 import 'package:kembangin_mobile/pages/auth/login.dart';
 import 'package:kembangin_mobile/pages/auth/register.dart';
+import 'package:kembangin_mobile/pages/profile/profile_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:app_popup_menu/app_popup_menu.dart';
@@ -80,11 +81,19 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                     PopupMenuItem(
                       child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MyHomePage()),
-                            );
+                            request.jsonData["id"] != null
+                                ? Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProfilePage(
+                                            id: request.jsonData["id"])),
+                                  )
+                                : Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyHomePage()),
+                                  );
                           },
                           child: const Text(
                             "Profile",
