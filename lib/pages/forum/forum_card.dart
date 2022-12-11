@@ -7,6 +7,7 @@ import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/pages/forum/forum_detail.dart';
 import 'package:kembangin_mobile/utils/forum_fetch.dart';
 import 'package:kembangin_mobile/pages/profile/profile_page.dart';
+import 'package:kembangin_mobile/utils/truncate_string.dart';
 
 class ForumCard extends StatefulWidget {
   const ForumCard({
@@ -67,25 +68,30 @@ class ForumCardState extends State<ForumCard> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          snapshot
-                                              .data![snapshot.data!.length -
-                                                  index -
-                                                  1]
-                                              .question,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              shadows: [
-                                                Shadow(
-                                                    color: Colors.red,
-                                                    offset: Offset(0, -5))
-                                              ],
-                                              color: Colors.transparent,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationColor: Colors.red,
-                                              decorationThickness: 2,
-                                              fontSize: 20),
+                                        Flexible(
+                                          child: Text(
+                                            truncateWithEllipsis(
+                                                40,
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .question),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                shadows: [
+                                                  Shadow(
+                                                      color: Colors.red,
+                                                      offset: Offset(0, -5))
+                                                ],
+                                                color: Colors.transparent,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationColor: Colors.red,
+                                                decorationThickness: 2,
+                                                fontSize: 20),
+                                          ),
                                         ),
                                         request.jsonData['username'] ==
                                                 snapshot
@@ -138,10 +144,15 @@ class ForumCardState extends State<ForumCard> {
                                       ]),
                                   Row(
                                     children: [
-                                      Text(snapshot
-                                          .data![
-                                              snapshot.data!.length - index - 1]
-                                          .description),
+                                      Flexible(
+                                        child: Text(truncateWithEllipsis(
+                                            35,
+                                            snapshot
+                                                .data![snapshot.data!.length -
+                                                    index -
+                                                    1]
+                                                .description)),
+                                      ),
                                     ],
                                   ),
                                   const Spacer(),

@@ -47,7 +47,7 @@ class ReplyCardState extends State<ReplyCard> {
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: SizedBox(
-                          height: 120,
+                          height: 150,
                           child: Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
@@ -56,15 +56,17 @@ class ReplyCardState extends State<ReplyCard> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
+                                        Flexible(
+                                            child: Text(
                                           snapshot.data!['replies'][
                                               snapshot.data!['replies'].length -
                                                   index -
                                                   1]['comment'],
+                                          textAlign: TextAlign.justify,
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
+                                              fontSize: 16),
+                                        )),
                                         IconButton(
                                             onPressed: () async {
                                               // try {
