@@ -4,14 +4,14 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+// import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   runApp(const MyApp());
 }
 
