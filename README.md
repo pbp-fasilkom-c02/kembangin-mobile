@@ -1,6 +1,6 @@
 ## Kembangin
+[![Build & upload to Firebase App Distribution](https://github.com/pbp-fasilkom-c02/kembangin-mobile/actions/workflows/main.yml/badge.svg)](https://github.com/pbp-fasilkom-c02/kembangin-mobile/actions/workflows/main.yml)[![Release](https://github.com/pbp-fasilkom-c02/kembangin-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/pbp-fasilkom-c02/kembangin-mobile/actions/workflows/release.yml)
 
-https://github.com/pbp-fasilkom-c02/kembangin-mobile
 
 Sebuah aplikasi yang berguna bagi pengguna untuk mendapatkan informasi dan kebutuhan kesehatan seakurat mungkin.
 

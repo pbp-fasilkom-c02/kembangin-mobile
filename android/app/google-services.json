@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "935655151425",
+    "project_id": "kembangin-a8aa4",
+    "storage_bucket": "kembangin-a8aa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935655151425:android:b6b6266b46fe2d7246b3c0",
+        "android_client_info": {
+          "package_name": "com.example.kembangin_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935655151425-0ggi1amif5ehin0526slt6gov94hdhot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdy83gfiqIX7JylpLiIvziRkk94ylCba8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935655151425-0ggi1amif5ehin0526slt6gov94hdhot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935655151425-0qvip42r9b4e55aei0uk71ncehl3s45s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kembanginMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
