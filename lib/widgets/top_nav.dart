@@ -36,10 +36,7 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(
                 Icons.person,
               ),
-              onPressed: () {
-                // nanti update ya kade
-                // do something
-              },
+              onPressed: () {},
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20),
             offset: const Offset(0, 60),
@@ -86,7 +83,12 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ProfilePage(
-                                            id: request.jsonData["id"])),
+                                              id: request.jsonData["id"],
+                                              username:
+                                                  request.jsonData["username"],
+                                              isDoctor:
+                                                  request.jsonData["is_doctor"],
+                                            )),
                                   )
                                 : Navigator.pushReplacement(
                                     context,

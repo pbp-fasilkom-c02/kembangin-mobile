@@ -169,13 +169,28 @@ class ForumCardState extends State<ForumCard> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       ProfilePage(
-                                                          id: snapshot
-                                                              .data![snapshot
-                                                                      .data!
-                                                                      .length -
-                                                                  index -
-                                                                  1]
-                                                              .authorPk)),
+                                                        id: snapshot
+                                                            .data![snapshot
+                                                                    .data!
+                                                                    .length -
+                                                                index -
+                                                                1]
+                                                            .authorPk,
+                                                        username: snapshot
+                                                            .data![snapshot
+                                                                    .data!
+                                                                    .length -
+                                                                index -
+                                                                1]
+                                                            .author,
+                                                        isDoctor: snapshot
+                                                            .data![snapshot
+                                                                    .data!
+                                                                    .length -
+                                                                index -
+                                                                1]
+                                                            .isDoctor,
+                                                      )),
                                             ),
                                             child: Text(
                                               "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",

@@ -107,14 +107,32 @@ class ReplyCardState extends State<ReplyCard> {
                                           onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => ProfilePage(
-                                                        id: snapshot.data![
-                                                            'replies'][snapshot
-                                                                .data![
-                                                                    'replies']
-                                                                .length -
-                                                            index -
-                                                            1]['author_pk'])),
+                                                    builder: (context) =>
+                                                        ProfilePage(
+                                                          id: snapshot.data![
+                                                              'replies'][snapshot
+                                                                  .data![
+                                                                      'replies']
+                                                                  .length -
+                                                              index -
+                                                              1]['author_pk'],
+                                                          username: snapshot
+                                                                  .data![
+                                                              'replies'][snapshot
+                                                                  .data![
+                                                                      'replies']
+                                                                  .length -
+                                                              index -
+                                                              1]['author'],
+                                                          isDoctor: snapshot
+                                                                  .data![
+                                                              'replies'][snapshot
+                                                                  .data![
+                                                                      'replies']
+                                                                  .length -
+                                                              index -
+                                                              1]['is_doctor'],
+                                                        )),
                                               ),
                                           child: Text(
                                             "dr. ${snapshot.data!['replies'][snapshot.data!['replies'].length - index - 1]['author']}",
