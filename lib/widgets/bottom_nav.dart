@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
-
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:kembangin_mobile/pages/artikel/artikel_card.dart';
+import 'package:kembangin_mobile/pages/artikel/artikel_page.dart';
 import 'package:kembangin_mobile/pages/anak/anak.dart';
-
-import 'package:kembangin_mobile/models/rekomendasi_model.dart';
 import 'package:kembangin_mobile/pages/bmicalculator/bmi_form2.dart';
 import 'package:kembangin_mobile/pages/forum/forum_page.dart';
 
@@ -41,7 +40,7 @@ class _BottomNavState extends State<BottomNav> {
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const MyHomePage()))
+                          builder: (context) => const ArtikelPage()))
                   : null
             },
           ),
@@ -69,12 +68,8 @@ class _BottomNavState extends State<BottomNav> {
             textColor: Colors.red.shade900,
             gap: 8,
             onPressed: () => {
-              widget.index != 2?
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyAnakPage(),
-                  )) : null
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const AnakPage()))
             },
           ),
           GButton(
@@ -87,9 +82,9 @@ class _BottomNavState extends State<BottomNav> {
             gap: 8,
             onPressed: () => {
               widget.index != 3
-                ? Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BmiFormPage()))
-                : null
+                  ? Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => BmiFormPage()))
+                  : null
             },
           )
         ],

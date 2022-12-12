@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'dart:html';
-import 'package:kembangin_mobile/pages/anak/rekomendasi.dart';
+import 'package:kembangin_mobile/pages/anak/rekomendasi/rekomendasi.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:provider/provider.dart';
