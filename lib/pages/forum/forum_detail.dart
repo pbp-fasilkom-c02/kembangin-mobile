@@ -8,6 +8,7 @@ import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';
 import 'package:kembangin_mobile/pages/forum/reply_card.dart';
 import 'package:kembangin_mobile/models/forum_model.dart';
+import 'package:kembangin_mobile/pages/forum/forum_page.dart';
 
 // ignore: must_be_immutable
 class ForumDetail extends StatelessWidget {
@@ -43,9 +44,14 @@ class ForumDetail extends StatelessWidget {
                   width: 40,
                 ),
                 TextButton(
-                    onPressed: () => Navigator.pop(
-                          context,
-                        ),
+                    onPressed: () => {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForumPage(),
+                            ),
+                          )
+                        },
                     child: Row(
                       children: const [
                         Icon(
@@ -66,15 +72,19 @@ class ForumDetail extends StatelessWidget {
                     children: [
                       Text(
                         forumData.question,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
                       Text(forumData.createdAt.toString().substring(0, 10)),
-                      Text(
-                        forumData.description,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                      SafeArea(
+                          minimum: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Text(
+                            forumData.description,
+                            textAlign: TextAlign.justify,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )),
                       const SizedBox(
                         height: 20,
                       ),
