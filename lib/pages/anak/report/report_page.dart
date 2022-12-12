@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kembangin_mobile/pages/report/add_report.dart';
-import 'package:kembangin_mobile/pages/report/reports.dart';
+import 'package:kembangin_mobile/pages/anak/report/add_report.dart';
+import 'package:kembangin_mobile/pages/anak/report/reports.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';

@@ -10,7 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kembangin_mobile/pages/forum/forum_card.dart';
 
 // ignore: must_be_immutable
-class ForumPage extends HookWidget {
+class ForumPage extends HookWidget {  // hookwidget berfungsi untuk 
   ForumPage({super.key});
 
   final pertanyaanController = TextEditingController();

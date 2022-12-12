@@ -40,8 +40,12 @@ dependencies:
   google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
   app_popup_menu: ^1.0.0
-  flutter_hooks: ^0.18.5+1
   http: ^0.13.5
+  flutter_hooks: ^0.18.5+1
+  intl: ^0.17.0
+  firebase_auth:
+  firebase_core:
+
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/pages/forum/forum_detail.dart';
 import 'package:kembangin_mobile/utils/forum_fetch.dart';
+import 'package:kembangin_mobile/utils/truncate_string.dart';
 
 class ForumCard extends StatefulWidget {
   const ForumCard({
@@ -57,7 +58,7 @@ class ForumCardState extends State<ForumCard> {
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: SizedBox(
-                          height: 120,
+                          height: 140,
                           child: Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
@@ -66,73 +67,137 @@ class ForumCardState extends State<ForumCard> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          snapshot
-                                              .data![snapshot.data!.length -
-                                                  index -
-                                                  1]
-                                              .question,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
+                                        Flexible(
+                                          child: Text(
+                                            truncateWithEllipsis(
+                                                40,
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .question),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                shadows: [
+                                                  Shadow(
+                                                      color: Colors.red,
+                                                      offset: Offset(0, -5))
+                                                ],
+                                                color: Colors.transparent,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationColor: Colors.red,
+                                                decorationThickness: 2,
+                                                fontSize: 20),
+                                          ),
                                         ),
-                                        IconButton(
-                                            onPressed: () async {
-                                              try {
-                                                await deleteForum(
-                                                        snapshot
-                                                            .data![snapshot
-                                                                    .data!
-                                                                    .length -
-                                                                index -
-                                                                1]
-                                                            .pk,
-                                                        request.jsonData[
-                                                            'username'])
-                                                    .then((response) => {
-                                                          res = jsonDecode(
-                                                              response),
-                                                          if (res['status'] ==
-                                                              true)
-                                                            {
-                                                              refreshWidget(),
-                                                              toast(
-                                                                  context,
-                                                                  false,
-                                                                  res['message'])
-                                                            }
-                                                          else
-                                                            {
-                                                              toast(
-                                                                  context,
-                                                                  true,
-                                                                  res['message'])
-                                                            }
-                                                        });
-                                              } catch (e) {
-                                                toast(context, true,
-                                                    "Kamu belum login!");
-                                              }
-                                              // print(request.jsonData);
-                                            },
-                                            icon: const Icon(Icons.delete))
+                                        request.jsonData['username'] ==
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .author
+                                            ? IconButton(
+                                                onPressed: () async {
+                                                  try {
+                                                    await deleteForum(
+                                                            snapshot
+                                                                .data![snapshot
+                                                                        .data!
+                                                                        .length -
+                                                                    index -
+                                                                    1]
+                                                                .pk,
+                                                            request.jsonData[
+                                                                'username'])
+                                                        .then((response) => {
+                                                              res = jsonDecode(
+                                                                  response),
+                                                              if (res['status'] ==
+                                                                  true)
+                                                                {
+                                                                  refreshWidget(),
+                                                                  toast(
+                                                                      context,
+                                                                      false,
+                                                                      res['message'])
+                                                                }
+                                                              else
+                                                                {
+                                                                  toast(
+                                                                      context,
+                                                                      true,
+                                                                      res['message'])
+                                                                }
+                                                            });
+                                                  } catch (e) {
+                                                    toast(context, true,
+                                                        "Kamu belum login!");
+                                                  }
+                                                  // print(request.jsonData);
+                                                },
+                                                icon: const Icon(Icons.delete))
+                                            : const Text("")
                                       ]),
                                   Row(
                                     children: [
-                                      Text(snapshot
-                                          .data![
-                                              snapshot.data!.length - index - 1]
-                                          .description),
+                                      Flexible(
+                                        child: Text(truncateWithEllipsis(
+                                            35,
+                                            snapshot
+                                                .data![snapshot.data!.length -
+                                                    index -
+                                                    1]
+                                                .description)),
+                                      ),
                                     ],
                                   ),
                                   const Spacer(),
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text("Dibuat oleh "),
-                                      Text(
-                                        "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                      Row(
+                                        children: [
+                                          const Text("Dibuat oleh "),
+                                          Text(
+                                            "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .replies
+                                                    .length
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Icon(
+                                                  Icons.chat_bubble_outline,
+                                                  color: Colors.red,
+                                                  size: 20),
+                                            ],
+                                          )
+                                        ],
                                       )
                                     ],
                                   )

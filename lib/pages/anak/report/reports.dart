@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kembangin_mobile/pages/report/report_detail.dart';
+import 'package:kembangin_mobile/pages/anak/report/report_detail.dart';
 import 'package:kembangin_mobile/utils/report_fetch.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';

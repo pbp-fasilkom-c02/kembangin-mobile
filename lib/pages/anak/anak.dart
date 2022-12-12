@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kembangin_mobile/pages/report/report_page.dart';
+import 'package:kembangin_mobile/pages/anak/rekomendasi/rekomendasi.dart';
+import 'package:kembangin_mobile/pages/anak/report/report_page.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:kembangin_mobile/widgets/top_nav.dart';
@@ -42,7 +43,12 @@ class _AnakPageState extends State<AnakPage> {
                     ),
                     paddingVertical: 8,
                     paddingHorizontal: 0,
-                    onPressed: () => {}),
+                    onPressed: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MyRekomendasiPage()))                      
+                    }),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: const Text(

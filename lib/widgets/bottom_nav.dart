@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/main.dart';
-
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:kembangin_mobile/pages/anak.dart';
+import 'package:kembangin_mobile/pages/anak/anak.dart';
+import 'package:kembangin_mobile/pages/bmicalculator/bmi_form2.dart';
 import 'package:kembangin_mobile/pages/forum/forum_page.dart';
 
 class BottomNav extends StatefulWidget {
@@ -78,7 +78,12 @@ class _BottomNavState extends State<BottomNav> {
             text: 'BMI',
             textColor: Colors.red.shade900,
             gap: 8,
-            onPressed: () => {},
+            onPressed: () => {
+              widget.index != 3
+                ? Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BmiFormPage()))
+                : null
+            },
           )
         ],
       ),
