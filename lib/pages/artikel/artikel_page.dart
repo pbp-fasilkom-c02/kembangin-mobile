@@ -43,6 +43,7 @@ class ArtikelPageState extends State<ArtikelPage> {
       judulController.clear();
       deskripsiController.clear();
       imageController.clear();
+      commentController.clear();
     }
 
     bool activeDoctor = false;

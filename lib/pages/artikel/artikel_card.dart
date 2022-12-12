@@ -3,6 +3,7 @@ import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:kembangin_mobile/utils/delete_artikel.dart';
+import 'package:kembangin_mobile/utils/artikel_fetch.dart';
 import 'package:kembangin_mobile/pages/artikel/artikel_detail.dart';
 
 class ArtikelCard extends StatefulWidget {
@@ -23,7 +24,8 @@ class ArtikelCardState extends State<ArtikelCard> {
   Widget build(BuildContext context) {
     Map res;
     final request = context.read<CookieRequest>();
-    Future fut = request.get("https://kembangin.up.railway.app/artikel/json");
+    Future fut = fetchArtikelPageModel();
+    fut = request.get("https://kembangin.up.railway.app/artikel/json");
 
     return (FutureBuilder(
         future: fut,
