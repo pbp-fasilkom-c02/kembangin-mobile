@@ -50,9 +50,33 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'You have pushed the button this many times:',
+          children: [
+            Container(
+              height: 280,
+              width: 280,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: const DecorationImage(
+                      image: NetworkImage(
+                          'https://cdn-icons-png.flaticon.com/512/4807/4807695.png'))),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Kembangin",
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                ),
+                Icon(
+                  Icons.favorite,
+                  color: Colors.black,
+                  size: 24.0,
+                  semanticLabel: 'Text to announce in accessibility modes',
+                )
+              ],
             ),
           ],
         ),
