@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kembangin_mobile/utils/artikel_fetch.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:kembangin_mobile/pages/artikel/artikel_detail.dart';
