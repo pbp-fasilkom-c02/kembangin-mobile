@@ -4,6 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'dart:convert';
 import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/utils/delete_forum_reply.dart';
+import 'package:kembangin_mobile/pages/profile/profile_page.dart';
 
 class ReplyCard extends StatefulWidget {
   final int forumPk;
@@ -102,11 +103,26 @@ class ReplyCardState extends State<ReplyCard> {
                                   Row(
                                     children: [
                                       const Text("Dibuat oleh "),
-                                      Text(
-                                        "dr. ${snapshot.data!['replies'][snapshot.data!['replies'].length - index - 1]['author']}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      )
+                                      GestureDetector(
+                                          onTap: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProfilePage(
+                                                          id: snapshot.data![
+                                                              'replies'][snapshot
+                                                                  .data![
+                                                                      'replies']
+                                                                  .length -
+                                                              index -
+                                                              1]['author_pk'],
+                                                        )),
+                                              ),
+                                          child: Text(
+                                            "dr. ${snapshot.data!['replies'][snapshot.data!['replies'].length - index - 1]['author']}",
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ))
                                     ],
                                   )
                                 ],

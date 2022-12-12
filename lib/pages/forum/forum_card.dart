@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:kembangin_mobile/widgets/toast.dart';
 import 'package:kembangin_mobile/pages/forum/forum_detail.dart';
 import 'package:kembangin_mobile/utils/forum_fetch.dart';
+import 'package:kembangin_mobile/pages/profile/profile_page.dart';
 import 'package:kembangin_mobile/utils/truncate_string.dart';
 
 class ForumCard extends StatefulWidget {
@@ -162,11 +163,27 @@ class ForumCardState extends State<ForumCard> {
                                       Row(
                                         children: [
                                           const Text("Dibuat oleh "),
-                                          Text(
-                                            "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          )
+                                          GestureDetector(
+                                            onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProfilePage(
+                                                        id: snapshot
+                                                            .data![snapshot
+                                                                    .data!
+                                                                    .length -
+                                                                index -
+                                                                1]
+                                                            .authorPk,
+                                                      )),
+                                            ),
+                                            child: Text(
+                                              "${snapshot.data![snapshot.data!.length - index - 1].isDoctor ? "dr. " : ""}${snapshot.data![snapshot.data!.length - index - 1].author}",
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       Row(
