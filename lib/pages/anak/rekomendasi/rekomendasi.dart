@@ -135,32 +135,18 @@ class _MyRekomendasiPageState extends State<MyRekomendasiPage> {
           future: _getRekomendasiAsync,
           builder: (context, AsyncSnapshot snapshot) {
             print(snapshot.data);
-            if (request.jsonData['username'] == null) {
-              return const Center(
-                  child: Text(
-                "Silahkan login terlebih dahulu :)",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ));
+            if (snapshot.data == null) {
+              return const Center(child: CircularProgressIndicator());
             } else {
-              if (request.jsonData['is_doctor']) {
-                FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddRekomendasiPage()),
-                    );
-                  },
-                  tooltip: 'Tambah Rekomendasi',
-                  child: const Icon(Icons.add),
-                );
-              }
-              if (snapshot.data == null) {
-                return Center(
-                  child: Text(
-                    "Belum ada rekomendasi :(",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
+              if (!snapshot.hasData) {
+                return Column(
+                  children: const [
+                    Text(
+                      "Belum ada rekomendasi :(",
+                      style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                    ),
+                    SizedBox(height: 8),
+                  ],
                 );
               } else {
                 return ListView.builder(
