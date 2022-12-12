@@ -9,19 +9,32 @@ import 'package:kembangin_mobile/widgets/top_nav.dart';
 import 'package:kembangin_mobile/pages/forum/reply_card.dart';
 import 'package:kembangin_mobile/models/forum_model.dart';
 import 'package:kembangin_mobile/pages/forum/forum_page.dart';
+import 'package:kembangin_mobile/utils/handle_vote.dart';
 
 // ignore: must_be_immutable
-class ForumDetail extends StatelessWidget {
+class ForumDetail extends StatefulWidget {
   final Forum forumData;
+
   ForumDetail({super.key, required this.forumData});
 
-  final komentarController = TextEditingController();
+  @override
+  State<ForumDetail> createState() => _ForumDetailState();
+}
 
+class _ForumDetailState extends State<ForumDetail> {
+  final komentarController = TextEditingController();
+  bool isPressed = false;
+  int currentUpvote = 0;
+  int currentDownvote = 0;
   String komentar = "";
 
   @override
   Widget build(BuildContext context) {
+    int upvote = isPressed ? currentUpvote : widget.forumData.upvote;
+    int downvote = isPressed ? currentDownvote : widget.forumData.downvote;
+
     final request = context.read<CookieRequest>();
+
     void clear() {
       // Clean up the controller when the widget is disposed.
       komentarController.clear();
@@ -71,20 +84,98 @@ class ForumDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        forumData.question,
+                        widget.forumData.question,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                      Text(forumData.createdAt.toString().substring(0, 10)),
+                      Text(widget.forumData.createdAt
+                          .toString()
+                          .substring(0, 10)),
                       SafeArea(
                           minimum: const EdgeInsets.symmetric(horizontal: 40),
                           child: Text(
-                            forumData.description,
+                            widget.forumData.description,
                             textAlign: TextAlign.justify,
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(children: [
+                            IconButton(
+                                icon: const Icon(Icons.arrow_circle_up_outlined,
+                                    color: Colors.red),
+                                onPressed: () => {
+                                      if (request.jsonData.isNotEmpty)
+                                        {
+                                          handleVote(widget.forumData.pk, "up")
+                                              .then((value) => {
+                                                    isPressed = true,
+                                                    currentUpvote =
+                                                        value['upvote'],
+                                                    currentDownvote =
+                                                        value['downvote'],
+                                                    setState(() {
+                                                      upvote = value['upvote'];
+                                                      downvote =
+                                                          value['downvote'];
+                                                    }),
+                                                  })
+                                        }
+                                      else
+                                        {
+                                          {
+                                            toast(context, true,
+                                                "Kamu belum login")
+                                          }
+                                        }
+                                    }),
+                            Text(
+                              upvote.toString(),
+                              style: TextStyle(color: Colors.red.shade700),
+                            )
+                          ]),
+                          Row(
+                            children: [
+                              IconButton(
+                                  icon: const Icon(
+                                      Icons.arrow_circle_down_outlined,
+                                      color: Colors.red),
+                                  onPressed: () => {
+                                        if (request.jsonData.isNotEmpty)
+                                          {
+                                            handleVote(
+                                                    widget.forumData.pk, "down")
+                                                .then((value) => {
+                                                      isPressed = true,
+                                                      currentUpvote =
+                                                          value['upvote'],
+                                                      currentDownvote =
+                                                          value['downvote'],
+                                                      setState(() {
+                                                        upvote =
+                                                            value['upvote'];
+                                                        downvote =
+                                                            value['downvote'];
+                                                      }),
+                                                    })
+                                          }
+                                        else
+                                          {
+                                            toast(context, true,
+                                                "Kamu belum login")
+                                          }
+                                      }),
+                              Text(
+                                downvote.toString(),
+                                style: TextStyle(color: Colors.red.shade700),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -112,7 +203,7 @@ class ForumDetail extends StatelessWidget {
                             komentar = komentarController.text;
                             // print(komentar);
                             if (request.jsonData['username'] != null) {
-                              int forum_id = forumData.pk;
+                              int forum_id = widget.forumData.pk;
                               String user = request.jsonData['username'];
                               // print(user);
                               final response = await request.post(
@@ -133,7 +224,7 @@ class ForumDetail extends StatelessWidget {
                                   "Kamu harus login terlebih dahulu!");
                             }
                           }),
-                      ReplyCard(forumPk: forumData.pk),
+                      ReplyCard(forumPk: widget.forumData.pk),
                     ]),
               ),
             ],
