@@ -130,96 +130,140 @@ class _MyRekomendasiPageState extends State<MyRekomendasiPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: const TopNavbar(),
-      bottomNavigationBar: const BottomNav(
-        index: 2,
-      ),
-      body: FutureBuilder(
-          future: _getRekomendasiAsync,
-          builder: (context, AsyncSnapshot snapshot) {
-            print(snapshot.data);
-            if (request.jsonData['username'] == null) {
-              return const Center(
-                  child: Text(
-                "Silahkan login terlebih dahulu :)",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ));
-            } else {
-              if (request.jsonData['is_doctor']) {
-                FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddRekomendasiPage()),
-                    );
-                  },
-                  tooltip: 'Tambah Rekomendasi',
-                  child: const Icon(Icons.add),
-                );
-              }
-              if (snapshot.data == null) {
-                return Center(
-                  child: Text(
-                    "Belum ada rekomendasi :(",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                );
-              } else {
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (_, index) => GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                      gambar:
-                                          snapshot.data![index].fields.gambar,
-                                      namaBarang: snapshot
-                                          .data![index].fields.namaBarang,
-                                      hargaBarang: snapshot
-                                          .data![index].fields.hargaBarang,
-                                      deskripsi: snapshot
-                                          .data![index].fields.deskripsi,
-                                      url: snapshot.data![index].fields.url,
-                                    )),
-                          );
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          padding: const EdgeInsets.all(20.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: Colors.red.shade900,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
-                              boxShadow: const [
-                                BoxShadow(color: Colors.black, blurRadius: 2.0)
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.network(
-                                  "${snapshot.data![index].fields.gambar}"),
-                              const SizedBox(height: 10),
-                              Text(
-                                "${snapshot.data![index].fields.namaBarang}",
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+        appBar: const TopNavbar(),
+        bottomNavigationBar: const BottomNav(
+          index: 2,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FutureBuilder(
+                  future: _getRekomendasiAsync,
+                  builder: (context, AsyncSnapshot snapshot) {
+                    print(snapshot.data);
+                    if (request.jsonData['username'] == null) {
+                      return const Center(
+                          child: Text(
+                        "Silahkan login terlebih dahulu :)",
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ));
+                    } else {
+                      // if (request.jsonData['is_doctor']) {
+                      //   FloatingActionButton(
+                      //     onPressed: () {
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => AddRekomendasiPage()),
+                      //       );
+                      //     },
+                      //     tooltip: 'Tambah Rekomendasi',
+                      //     child: const Icon(Icons.add),
+                      //   );
+                      // }
+                      // if (request.jsonData['is_doctor']) {
+                      // FloatingActionButton(
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => AddRekomendasiPage()),
+                      //     );
+                      //   },
+                      //   tooltip: 'Tambah Rekomendasi',
+                      //   child: const Icon(Icons.add),
+                      // );
+                      // }
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (_, index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              gambar: snapshot
+                                                  .data![index].fields.gambar,
+                                              namaBarang: snapshot.data![index]
+                                                  .fields.namaBarang,
+                                              hargaBarang: snapshot.data![index]
+                                                  .fields.hargaBarang,
+                                              deskripsi: snapshot.data![index]
+                                                  .fields.deskripsi,
+                                              url: snapshot
+                                                  .data![index].fields.url,
+                                            )),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 12),
+                                  padding: const EdgeInsets.all(20.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: Colors.red.shade900,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.black,
+                                            blurRadius: 2.0)
+                                      ]),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.network(
+                                          "${snapshot.data![index].fields.gambar}"),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        "${snapshot.data![index].fields.namaBarang}",
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )));
+                      } else {
+                        return Center(
+                          child: Text(
+                            "Belum ada rekomendasi :(",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
                           ),
-                        )));
-              }
-            }
-          }),
-    );
+                        );
+                      }
+                    }
+                  }),
+              // FloatingActionButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => AddRekomendasiPage()),
+              //     );
+              //   },
+              //   tooltip: 'Tambah Rekomendasi',
+              //   child: const Icon(Icons.add),
+              // )
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => AddRekomendasiPage()),
+            );
+          },
+          tooltip: 'Tambah Rekomendasi',
+          child: const Icon(Icons.add),
+        ));
   }
 }
