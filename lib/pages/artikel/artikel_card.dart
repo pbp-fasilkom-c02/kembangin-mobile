@@ -79,40 +79,7 @@ class ArtikelCardState extends State<ArtikelCard> {
                                               fontSize: 20),
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                IconButton(
-                                                    onPressed: () async {
-                                                      if (request.jsonData[
-                                                              "username"] !=
-                                                          null) {
-                                                        await request
-                                                            .post('https://kembangin.up.railway.app/artikel/${snapshot.data![snapshot.data!.length - index - 1]['pk']}/vote/up', {}).then(
-                                                                (value) => print(
-                                                                    "berhasil"));
-                                                        refreshWidget();
-                                                        // ignore: use_build_context_synchronously
-                                                        toast(context, false,
-                                                            "Berhasil Upvote");
-                                                      } else {
-                                                        toast(context, true,
-                                                            "Kamu harus login terlebih dahulu!");
-                                                      }
-                                                    },
-                                                    icon: const Icon(Icons
-                                                        .thumb_up_rounded)),
-                                                Text(snapshot.data[snapshot
-                                                            .data!.length -
-                                                        index -
-                                                        1]["fields"]["upvote"]
-                                                    .toString())
-                                              ],
-                                            ),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -128,7 +95,7 @@ class ArtikelCardState extends State<ArtikelCard> {
                                                                     "berhasil"));
                                                         refreshWidget();
                                                         // ignore: use_build_context_synchronously
-                                                        toast(context, true,
+                                                        toast(context, false,
                                                             "Berhasil DownVote");
                                                       } else {
                                                         toast(context, true,
@@ -146,13 +113,43 @@ class ArtikelCardState extends State<ArtikelCard> {
                                             ),
                                           ],
                                         ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                                onPressed: () async {
+                                                  if (request.jsonData[
+                                                          "username"] !=
+                                                      null) {
+                                                    await request.post(
+                                                        'https://kembangin.up.railway.app/artikel/${snapshot.data![snapshot.data!.length - index - 1]['pk']}/vote/up',
+                                                        {}).then((value) => print("berhasil"));
+                                                    refreshWidget();
+                                                    // ignore: use_build_context_synchronously
+                                                    toast(context, false,
+                                                        "Berhasil Upvote");
+                                                  } else {
+                                                    toast(context, true,
+                                                        "Kamu harus login terlebih dahulu!");
+                                                  }
+                                                },
+                                                icon: const Icon(
+                                                    Icons.thumb_up_rounded)),
+                                            Text(snapshot.data[
+                                                    snapshot.data!.length -
+                                                        index -
+                                                        1]["fields"]["upvote"]
+                                                .toString())
+                                          ],
+                                        ),
                                         IconButton(
                                             onPressed: () async {
-                                              print("masukkk");
-                                              print(snapshot.data![
-                                                  snapshot.data!.length -
-                                                      index -
-                                                      1]['pk']);
+                                              // print("masukkk");
+                                              // print(snapshot.data![
+                                              //     snapshot.data!.length -
+                                              //         index -
+                                              //         1]['pk']);
                                               if (request
                                                       .jsonData["username"] !=
                                                   null) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/pages/artikel/artikel_card.dart';
+import 'package:kembangin_mobile/pages/artikel/artikel_comment_card.dart';
 import 'package:kembangin_mobile/widgets/bottom_nav.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
@@ -25,10 +26,12 @@ class ArtikelPageState extends State<ArtikelPage> {
   final judulController = TextEditingController();
   final deskripsiController = TextEditingController();
   final imageController = TextEditingController();
+  final commentController = TextEditingController();
 
   String title = "";
   String description = "";
   String image = "";
+  String comment = "";
 
   @override
   Widget build(BuildContext context) {
@@ -189,14 +192,10 @@ class ArtikelPageState extends State<ArtikelPage> {
                                         'title': title,
                                         'description': description,
                                         'photo': image,
-                                      }).then((value) => print("berhasil"));
+                                      }).then((value) =>
+                                      {clear(), rebuildAllChildren(context)});
                                   // ignore: use_build_context_synchronously
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ArtikelPage()),
-                                  );
+
                                   // ignore: use_build_context_synchronously
                                   toast(context, false,
                                       "Berhasil Menambah Artikel");
@@ -207,6 +206,56 @@ class ArtikelPageState extends State<ArtikelPage> {
                               }
                             }),
                         const ArtikelCard(),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        const Text(
+                          "Tuliskan Komentar Anda :D",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                        InputField(
+                          prefixIcon: const Icon(
+                            Icons.reply,
+                            size: 20,
+                            color: Colors.red,
+                          ),
+                          hintText: "Komentar",
+                          controller: commentController,
+                          isPassword: false,
+                        ),
+                        ButtonWidget(
+                            marginHorizontal: 40,
+                            marginVertical: 25,
+                            width: double.infinity,
+                            text: const Text(
+                              "Reply",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            paddingVertical: 8,
+                            paddingHorizontal: 0,
+                            onPressed: () async {
+                              comment = commentController.text;
+                              if (request.jsonData['username'] != null) {
+                                await request.post(
+                                    'https://kembangin.up.railway.app/artikel/share-exp/',
+                                    {
+                                      'comment': comment
+                                    }).then((value) =>
+                                    {clear(), rebuildAllChildren(context)});
+
+                                // ignore: use_build_context_synchronously
+                                toast(context, false,
+                                    "Berhasil Menambah Komentar");
+                              } else {
+                                toast(context, true,
+                                    "Kamu harus login terlebih dahulu!");
+                              }
+                            }),
+                        const ArtikelComment()
                       ]),
                 ),
               ],
