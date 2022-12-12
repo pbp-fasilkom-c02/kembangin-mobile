@@ -196,6 +196,60 @@ class ForumCardState extends State<ForumCard> {
                                                   color: Colors.red,
                                                   size: 20),
                                             ],
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .upvote
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Icon(Icons.arrow_circle_up,
+                                                  color: Colors.red, size: 20),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .downvote
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Icon(
+                                                  Icons.arrow_circle_down,
+                                                  color: Colors.red,
+                                                  size: 20),
+                                            ],
                                           )
                                         ],
                                       )
