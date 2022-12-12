@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:kembangin_mobile/pages/profile/bio_form.dart';
+import 'package:kembangin_mobile/pages/profile/doctor_profile.dart';
 import 'package:kembangin_mobile/utils/profile_fetch_data.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:http/http.dart' as http;
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
 import 'package:kembangin_mobile/widgets/toast.dart';
 
 class ProfileDetail extends StatefulWidget {
-  const ProfileDetail({super.key, required int this.id});
+  const ProfileDetail({super.key, required this.id});
   final int id;
 
   @override
-  PorfileDetailState createState() => PorfileDetailState();
+  ProfileDetailState createState() => ProfileDetailState();
 }
 
-class PorfileDetailState extends State<ProfileDetail> {
+class ProfileDetailState extends State<ProfileDetail> {
   void refreshWidget() {
     setState(() {});
   }
@@ -105,9 +105,12 @@ class PorfileDetailState extends State<ProfileDetail> {
                             showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return const BioForm();
+                                  return BioForm(id: widget.id);
                                 });
-                          })
+                          }),
+                snapshot.data[0].isDoctor
+                    ? DoctorDetail(id: widget.id)
+                    : const Text("Bukan Dokter"),
               ],
             );
           }
