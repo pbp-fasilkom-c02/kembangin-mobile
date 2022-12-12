@@ -4,16 +4,15 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:kembangin_mobile/widgets/input_field.dart';
 import 'package:kembangin_mobile/widgets/button.dart';
+import 'package:kembangin_mobile/pages/profile/profile_detail.dart';
+import 'package:kembangin_mobile/widgets/toast.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage(
-      {super.key,
-      required this.id,
-      required this.username,
-      required this.isDoctor});
-  final int? id;
-  final String? username;
-  final bool? isDoctor;
+  const ProfilePage({
+    super.key,
+    required this.id,
+  });
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,11 @@ class ProfilePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Text(id.toString())]),
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ProfileDetail(id: id),
+                ],
+              ),
             ),
           ],
         ),

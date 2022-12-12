@@ -84,10 +84,6 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
                                     MaterialPageRoute(
                                         builder: (context) => ProfilePage(
                                               id: request.jsonData["id"],
-                                              username:
-                                                  request.jsonData["username"],
-                                              isDoctor:
-                                                  request.jsonData["is_doctor"],
                                             )),
                                   )
                                 : Navigator.pushReplacement(

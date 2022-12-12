@@ -116,22 +116,6 @@ class ReplyCardState extends State<ReplyCard> {
                                                                   .length -
                                                               index -
                                                               1]['author_pk'],
-                                                          username: snapshot
-                                                                  .data![
-                                                              'replies'][snapshot
-                                                                  .data![
-                                                                      'replies']
-                                                                  .length -
-                                                              index -
-                                                              1]['author'],
-                                                          isDoctor: snapshot
-                                                                  .data![
-                                                              'replies'][snapshot
-                                                                  .data![
-                                                                      'replies']
-                                                                  .length -
-                                                              index -
-                                                              1]['is_doctor'],
                                                         )),
                                               ),
                                           child: Text(

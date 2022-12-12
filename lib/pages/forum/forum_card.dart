@@ -176,20 +176,6 @@ class ForumCardState extends State<ForumCard> {
                                                                 index -
                                                                 1]
                                                             .authorPk,
-                                                        username: snapshot
-                                                            .data![snapshot
-                                                                    .data!
-                                                                    .length -
-                                                                index -
-                                                                1]
-                                                            .author,
-                                                        isDoctor: snapshot
-                                                            .data![snapshot
-                                                                    .data!
-                                                                    .length -
-                                                                index -
-                                                                1]
-                                                            .isDoctor,
                                                       )),
                                             ),
                                             child: Text(
