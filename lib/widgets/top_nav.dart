@@ -19,7 +19,7 @@ class TopNavbar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const MyApp()));
+                  MaterialPageRoute(builder: (context) => const MyHomePage()));
             },
             color: Colors.red,
             icon: const Icon(Icons.home),
