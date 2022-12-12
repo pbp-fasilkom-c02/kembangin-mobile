@@ -19,7 +19,12 @@ class _AnakPageState extends State<AnakPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
-    bool isVisible = request.jsonData['is_doctor'];
+    bool? isVisible;
+    if (request.jsonData['is_doctor'] == true) {
+      isVisible = true;
+    } else {
+      isVisible = false;
+    }
 
     return Scaffold(
         appBar: const TopNavbar(),
@@ -75,7 +80,7 @@ class _AnakPageState extends State<AnakPage> {
                             marginVertical: 10,
                             width: double.infinity,
                             text: const Text(
-                              "Tambah Rekomendasi Kebutuhan Anak",
+                              "Tambah Rekomendasi Kebutuhan Anak", textAlign: TextAlign.center,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
